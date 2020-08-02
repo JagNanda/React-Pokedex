@@ -21,9 +21,9 @@ import {ReactComponent as WaterIcon} from '../images/icons/water.svg';
 
 const IconBackground = styled.div `
     
-    background: ${props => props.color};
+    background: ${({theme, color}) => theme[color]};
     border-radius: 100%;
-    box-shadow: 0px 0px 5px ${props => props.color};
+    box-shadow: 0px 0px 5px ${({theme, color}) => theme[color]};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,78 +48,79 @@ const TypeIcon = (props) => {
     switch(props.type){
         case "bug":
             icon = <BugIcon />;
-            color = "#92BC2C";
+            color = "bug";
             break; 
         case "dark":
             icon = <DarkIcon />;
-            color = "#595761";
+            color = "dark";
             break;
         case "dragon":
             icon = <DragonIcon />;
-            color = "#0C69C8";
+            color = "dragon";
             break;
         case "electric":
             icon = <ElectricIcon />;
-            color = "#F2D94E";
+            color = "electric";
             break;
         case "fairy":
             icon = <FairyIcon />;
-            color = "#EE90E6";
+            color = "fairy";
             break;
         case "fighting":
             icon = <FightingIcon />;
-            color = "#D3425F";
+            color = "fighting";
             break;
         case "fire":
             icon = <FireIcon />;
-            color = "#FBA54C";
+            color = "fire";
             break;
         case "flying":
             icon = <FlyingIcon />;
-            color = "#A1BBEC";
+            color = "flying";
             break;
         case "ghost":
             icon = <GhostIcon />;
-            color = "#5F6DBC";
+            color = "ghost";
             break;
         case "grass":
             icon = <GrassIcon />;
-            color = "#5FBD58";
+            color = "grass";
             break;
         case "ground":
             icon = <GroundIcon />;
-            color = "#C9BB8A";
+            color = "ground";
             break;
         case "ice":
             icon = <IceIcon />;
-            color = "#75D0C1";
+            color = "ice";
             break;
         case "normal":
             icon = <NormalIcon />;
-            color = "#A0A29F";
+            color = "normal";
             break;
         case "poison":
             icon = <PoisonIcon />;
-            color = "#B763CF";
+            color = "poison";
             break;
         case "psychic":
             icon = <PsychicIcon />;
-            color = "#FA8581";
+            color = "psychic";
             break;
         case "rock":
             icon = <RockIcon />;
-            color = "#C9BB8A";
+            color = "rock";
             break;
         case "steel":
             icon = <SteelIcon />;
-            color = "#5695A3";
+            color = "steel";
             break;
         case "water":
             icon = <WaterIcon />;
-            color = "#539DDF";
+            color = "water";
             break;
         default: 
             icon = <BugIcon/>;
+            color = "white";
     }
 
     return (
