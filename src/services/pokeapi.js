@@ -1,17 +1,21 @@
 
-// try getting pokemon from cache. If it doesn't exist, add it to the cache (which automatically makes the call and stores the response),
-    // and return the response
+/* try getting pokemon from cache. If it doesn't exist, add it to the cache (which automatically makes the call and stores the response),
+ and return the response */
 const getPokemon = async (id) => {
     
     let url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
     const cache = await caches.open("pokemon")
     let match = await cache.match(url);
-    if(!match){
-        console.log(`Pokemon with id ${id} doesn't exist in cache. Creating request to ${url}`);
-        await cache.add(url);
+    if(match){
+        return match.json();
     }
-    match = await cache.match(url);
-    return await match.json();
+    else{
+
+        let response = await fetch(url);
+        await cache.put(url, response.clone());
+        return await response.json();
+    }
+    
     
 }
 
@@ -29,6 +33,7 @@ const getAllPokemon = async () => {
     return pokemonList;
 
 }
+
 
 export default {
     getPokemon,

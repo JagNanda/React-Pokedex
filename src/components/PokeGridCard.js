@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import TypeIcon from './TypeIcon';
 
 const GridCard = styled.div `
-    border: ${({theme, typeColor}) => theme[typeColor]}
     background-clip: border-box;
     box-sizing: border-box;
     border: 1px solid ${({theme, typeColor}) => theme[typeColor]};
     border-radius: 10px;
-    box-shadow: 0px 0px 4px ${({theme, typeColor}) => theme[typeColor]};  
+    box-shadow: 0px 0px 4px ${({theme, typeColor}) => theme[typeColor]};    
+    display: flex;
+    flex-direction: column;
+    padding: 0.3rem;
     height: 200px;
-    padding: 0.3rem; 
+    width: 100%;
 `
 const CardHeader = styled.div `
     display: flex;
@@ -19,6 +21,7 @@ const CardHeader = styled.div `
 `
 
 const CardId = styled.strong `
+    font-size: 0.8rem;
 `
 
 const CardTypes = styled.div `
@@ -26,10 +29,15 @@ const CardTypes = styled.div `
 `
 
 const CardBody = styled.div `
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
     text-align: center;
+`
+const CardImg = styled.img `
+    max-width: 80%;
 `
 
 const CardName = styled.p `
@@ -46,7 +54,7 @@ const addLeadingZeros = (id) => {
     return sid;
 }
 
-const PokeGridCard = ({pokemon}) => {
+const PokeGridCard = ({pokemon, image}) => {
     const type1 = pokemon.types[0].type.name;
     const type2 = pokemon.types[1]?.type.name;
 
@@ -60,6 +68,7 @@ const PokeGridCard = ({pokemon}) => {
                 </CardTypes>
             </CardHeader>
             <CardBody>
+                <CardImg src={image} alt={pokemon.name}/>
                 <CardName>{pokemon.name}</CardName>
             </CardBody>
         </GridCard>

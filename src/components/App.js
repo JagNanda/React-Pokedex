@@ -1,7 +1,9 @@
+import 'normalize.css';
 import React, {useState, useEffect} from 'react';
-import PokeList from './PokeGrid';
-import pokeApi from '../services/pokeapi';
 import {ThemeProvider} from 'styled-components';
+import PokeGrid from './PokeGrid';
+import pokeApi from '../services/pokeapi';
+import pokeRes from '../services/pokeres';
 
 const typesTheme = {
   bug: "#92BC2C",
@@ -14,7 +16,7 @@ const typesTheme = {
   flying: "#A1BBEC",
   ghost: "#5F6DBC",
   grass: "#5FBD58",
-  ground: "#C9BB8A",
+  ground: "#DA7C4D",
   ice: "#75D0C1",
   normal:  "#A0A29F",
   poison: "#B763CF", 
@@ -27,24 +29,35 @@ const typesTheme = {
 const App = () => {
 
   const [allPokemon, setAllPokemon] = useState([]);
+  const [allPokemonImages, setAllPokemonImages] = useState([]);
 
   //retrieve all pokemon and add them to browser cache storage if the cache "pokemon" doesn't already exist
   useEffect(() => {
 
     const getAllPokemon = async () => {
-      const result = await pokeApi.getAllPokemon();
-      setAllPokemon(result);
+      const pokemon = await pokeApi.getAllPokemon();
+      setAllPokemon(pokemon);
     } 
     getAllPokemon();
   },[]);
 
+  useEffect(() => {
+    
+    const getAllPokemonImages = async () => {
+      const pokemonImgs = await pokeRes.getAllPokemonImages();
+      setAllPokemonImages(pokemonImgs);
+    }
 
-  useEffect(() => console.log("Pokemon state updated",allPokemon), [allPokemon] );
-
+    getAllPokemonImages();
+  }, []);
+  
   return (
     <div className="App">
       <ThemeProvider theme={typesTheme}>
-        <PokeList allPokemon={allPokemon} />
+        <PokeGrid
+          allPokemon={allPokemon} 
+          allPokemonImages={allPokemonImages}
+        />
       </ThemeProvider>
     </div>
   );
